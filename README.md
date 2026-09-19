@@ -18,7 +18,7 @@ Built while following the Udemy course *"COMPLETE Java 2023 Object-Oriented Prog
 
 ## Document model
 
-<a href="docs/document-model.svg"><img src="docs/document-model.svg" alt="Document model: User and Post as collections; AuthorDTO and CommentDTO embedded inside the post." width="880"></a>
+<p align="center"><a href="docs/document-model.svg"><img src="docs/document-model.svg" alt="Document model: User and Post as collections; AuthorDTO and CommentDTO embedded inside the post." width="880"></a></p>
 
 Only **`User`** and **`Post`** are collections. Everything in gray is stored *inside* a post document:
 
@@ -70,11 +70,16 @@ The API starts on `http://localhost:8080` against the `workshop_mongo` database,
 
 ## Diagrams
 
-Click a diagram to open it at full size. The diagram is generated from the Mermaid source in `docs/`, so it stays editable text rather than a binary image:
+Click a diagram to open it at full size. The diagram is generated from the Mermaid source in `docs/`, so it stays editable text rather than binary images:
 
 ```bash
-npx @mermaid-js/mermaid-cli -i docs/document-model.mmd -o docs/document-model.svg -t default -b white -c docs/mermaid-config.json
+for d in docs/*.mmd; do
+  npx @mermaid-js/mermaid-cli -i "$d" -o "${d%.mmd}.svg" -t default -b white -c docs/mermaid-config.json
+  python3 docs/finish-svg.py "${d%.mmd}.svg"
+done
 ```
+
+`finish-svg.py` adds a margin around each diagram and gives the arrow labels an opaque background, so the SVG looks the same in any viewer.
 
 ## License
 
